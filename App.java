@@ -13,7 +13,6 @@ public class App extends JFrame {
     private JLabel instructionText;
     private JTextField input;
     private JButton enter;
-    private JFrame popup;
     private JLabel feedback;
     private JButton moveOn;
 
@@ -236,6 +235,7 @@ public class App extends JFrame {
         frameMain.setTitle("Cyrilic Alphabet Tutor");
         frameMain.setSize(frameWidth, frameHeight);
         frameMain.setVisible(true);
+        frameMain.setLayout(null);
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setLocationRelativeTo(null);
 
@@ -261,11 +261,11 @@ public class App extends JFrame {
             100, 100);
         enter.setBackground(Color.WHITE);
         enter.setOpaque(true);
-        getRootPane().setDefaultButton(enter);
+        frameMain.getRootPane().setDefaultButton(enter);
 
-        add(instructionText);
-        add(input);
-        add(enter);
+        frameMain.add(instructionText);
+        frameMain.add(input);
+        frameMain.add(enter);
 
         enter.addActionListener(new ActionListener() {
             @Override
@@ -297,7 +297,7 @@ public class App extends JFrame {
                 popup.add(feedback);
                 popup.add(moveOn);
 
-                getRootPane().setDefaultButton(moveOn);
+                popup.getRootPane().setDefaultButton(moveOn);
                 moveOn.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed (ActionEvent e) {
