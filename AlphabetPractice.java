@@ -694,6 +694,7 @@ public class AlphabetPractice extends JFrame {
                     , popupWidth, popupHeight/2);
                 pronunciation.setText
                     (analyzeCyrillicString(pronunciationMeaning[0][count]));
+                pronunciation.setFont(new Font("Courier", Font.BOLD, 20));
                 
                 String userResponse = input.getText();
                 if (userResponse.equalsIgnoreCase(pronunciationMeaning[1][count])) {
@@ -711,12 +712,13 @@ public class AlphabetPractice extends JFrame {
                      "\n Press the Enter key to move on. "
                      + "</html>");
                 }   
-                moveOn = new JButton("Continue");
+                moveOn = new JButton();
                 moveOn.setBounds(0, 0, popupWidth, popupHeight);
                 moveOn.setBackground(Color.WHITE);
                 moveOn.setOpaque(false);
 
                 popup.add(feedback);
+                popup.add(pronunciation);
                 popup.add(moveOn);
 
                 popup.getRootPane().setDefaultButton(moveOn);
@@ -746,7 +748,7 @@ public class AlphabetPractice extends JFrame {
     }
 
     public String analyzeCyrillicString(String cyrillicString) {
-        StringBuilder pronunciation = new StringBuilder();
+        String pronunciation = new String();
         
         for (int i = 0; i < cyrillicString.length(); i++) {
             char c = cyrillicString.charAt(i);
@@ -754,17 +756,19 @@ public class AlphabetPractice extends JFrame {
             // Check if the character is Cyrillic
             if (Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CYRILLIC) {
                 // Map the Cyrillic character to its English pronunciation
-                String englishPronunciation = mapCyrillicToEnglishPronunciation(c);
+                String englishPronunciation = 
+                    mapCyrillicToEnglishPronunciation(c);
                 
                 // Append the character and its pronunciation to the result
-                pronunciation.append(c).append(": ").append(englishPronunciation).append("\n");
+                pronunciation += c + ": " + englishPronunciation + "\n";
             }
         }
         
-        return pronunciation.toString();
+        return pronunciation;
     }
 
     private String mapCyrillicToEnglishPronunciation(char c) {
+        c = Character.toLowerCase(c);
         switch (c) {
             case 'а':
                 return "a";
