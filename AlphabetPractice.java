@@ -10,6 +10,7 @@ public class AlphabetPractice extends JFrame {
     int count = 0;
     boolean reset = true;
     private JFrame frameMain;
+    private JPanel highlight;
     private JLabel instructionText;
     private JTextField input;
     private JButton enter;
@@ -648,7 +649,7 @@ public class AlphabetPractice extends JFrame {
             ("NearAChurch_FyodorVasilev.jfif");
         JLabel background = new JLabel(backgroundImageIcon);
         background.setBounds(0, 0, frameWidth, frameHeight);
-        layeredPane.add(background, 0);
+        layeredPane.add(background, JLayeredPane.FRAME_CONTENT_LAYER);
 
 
         //String to be displayed in instructions
@@ -658,7 +659,7 @@ public class AlphabetPractice extends JFrame {
         instructionText = new JLabel ("<html>" + "Type the English pronunciation of [ " 
             + cyrilicWord + " ]. Click Enter when you are finished." + "</html>");
         instructionText.setBounds((int) frameWidth/25, 0, 
-            (int) frameWidth, (int) frameHeight/2);
+            (int) (frameWidth-frameWidth/5), (int) frameHeight/2);
         instructionText.setFont(new Font("Courier", Font.BOLD, 20));
 
         // Text box to type answers in 
