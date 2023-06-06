@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class App extends JFrame {
+public class AlphabetPractice extends JFrame {
 
     int vocabSize = 50;
     int count = 0;
@@ -23,7 +23,7 @@ public class App extends JFrame {
 
     String cyrilicWord;
 
-    public App() {
+    public AlphabetPractice() {
         
         // if statement to help shrink long input of cyrilic vocab
         if (true) {
@@ -323,7 +323,7 @@ public class App extends JFrame {
         return returnString;
     }
     public static void main (String[] args) {
-        App app = new App();
+        AlphabetPractice app = new AlphabetPractice();
         app.setVisible(true);
     }
 }
