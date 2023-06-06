@@ -648,7 +648,7 @@ public class AlphabetPractice extends JFrame {
             ("NearAChurch_FyodorVasilev.jfif");
         JLabel background = new JLabel(backgroundImageIcon);
         background.setBounds(0, 0, frameWidth, frameHeight);
-        layeredPane.add(background, JLayeredPane.FRAME_CONTENT_LAYER);
+        layeredPane.add(background, 0);
 
 
         //String to be displayed in instructions
@@ -675,9 +675,9 @@ public class AlphabetPractice extends JFrame {
         enter.setOpaque(true);
         frameMain.getRootPane().setDefaultButton(enter);
 
-        layeredPane.add(instructionText, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(input, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(enter, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(instructionText, 2);
+        layeredPane.add(input, 2);
+        layeredPane.add(enter, 2);
         frameMain.setContentPane(layeredPane);
         frameMain.setVisible(true);
         /* 
