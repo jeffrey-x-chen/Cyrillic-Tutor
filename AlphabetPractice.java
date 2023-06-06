@@ -642,12 +642,17 @@ public class AlphabetPractice extends JFrame {
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setLocationRelativeTo(null);
 
-        ImageIcon backgroundImageIcon = new ImageIcon("path/to/your/image.jpg");
-        Image backgroundImage = backgroundImageIcon.getImage();
+        ImageIcon backgroundImageIcon = new ImageIcon
+            ("NearAChurch_FyodorVasilev.jfif");
+        JLabel background = new JLabel(backgroundImageIcon);
+        // Set the layout manager of the content pane to BorderLayout
+        frameMain.getContentPane().setLayout(new BorderLayout());
         
-        BackgroundPanel backgroundPanel = new BackgroundPanel(backgroundImage);
+        // Add the label to the center of the content pane
+        frameMain.getContentPane().add(background, BorderLayout.CENTER);
+        frameMain.setVisible(true);
+        frameMain.setLayout(null);
 
-        frameMain.setContentPane(backgroundPanel);
         
         //String to be displayed in instructions
         cyrilicWord = randomize();
