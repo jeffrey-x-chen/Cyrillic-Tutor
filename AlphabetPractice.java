@@ -8,10 +8,13 @@ public class AlphabetPractice extends JFrame {
 
     int vocabSize = 200;
     int count = 0;
-    boolean reset = true;
+    int correct = 0;
+    int incorrect = 0;
     private JFrame frameMain;
     private JPanel highlight;
     private JLabel instructionText;
+    private JPanel scoreHighlight;
+    private JLabel score;
     private JTextField input;
     private JButton enter;
     private JLabel feedback;
@@ -658,15 +661,29 @@ public class AlphabetPractice extends JFrame {
         // Instruction text, contains cyrilic word
         instructionText = new JLabel ("<html>" + "Type the English pronunciation of [ " 
             + cyrilicWord + " ]. Click Enter when you are finished." + "</html>");
-        instructionText.setBounds((int) frameWidth/25, 0, 
-            (int) (frameWidth-frameWidth/5), (int) frameHeight/2);
+        instructionText.setBounds(frameWidth/25, 0, 
+            frameWidth-frameWidth/5, frameHeight/2);
         instructionText.setFont(new Font("Courier", Font.BOLD, 20));
 
+        // box behind instructions to make it stand out
         highlight = new JPanel();
         highlight.setBounds(frameWidth/50, frameHeight/5, 
             frameWidth-frameWidth/10, frameHeight/9);
         highlight.setBackground(Color.WHITE);
-        // Text box to type answers in 
+        
+        // score measuring correct and incorrect counts
+        score = new JLabel ("<html>" + "Correct: " + correct + 
+            " Incorrect: " + incorrect + "</html>");
+        score.setFont(new Font("Courier", Font.BOLD, 20));
+        score.setBounds(frameWidth/25, 0, 
+            frameWidth-frameWidth/5, frameHeight/10);
+        
+        scoreHighlight = new JPanel();
+        scoreHighlight.setBounds(frameWidth/50, frameHeight/100, 
+            (int) (frameWidth-frameWidth/1.8), frameHeight/11);
+        scoreHighlight.setBackground(Color.WHITE);
+
+        // Text box to type answers in
         input = new JTextField();
         input.setBounds((int) frameWidth/25, (int)frameHeight/2, 
             (int) (frameWidth * 0.7), 100);
@@ -681,6 +698,8 @@ public class AlphabetPractice extends JFrame {
         frameMain.getRootPane().setDefaultButton(enter);
 
         layeredPane.add(highlight,JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(scoreHighlight,JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(score, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(instructionText, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(input, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(enter, JLayeredPane.PALETTE_LAYER);
@@ -700,7 +719,7 @@ public class AlphabetPractice extends JFrame {
                 // Popup window after enter is clicked
                 JFrame popup = new JFrame();
                 int popupWidth = 500;
-                int popupHeight = 600;
+                int popupHeight = 400;
                 popup.setTitle("Feedback");
                 popup.setSize(popupWidth, popupHeight);
                 popup.setLayout(null);
@@ -727,6 +746,7 @@ public class AlphabetPractice extends JFrame {
                      pronunciationMeaning[2][count] + "." + 
                      "\n Press the Enter key to move on. "
                      + "</html>");
+                     correct++;
                 }   else {
                     feedback.setText("<html>" + "Not quite. " + 
                      pronunciationMeaning[0][count] + " is pronounced as " + 
@@ -734,6 +754,7 @@ public class AlphabetPractice extends JFrame {
                      pronunciationMeaning[2][count] + "." + 
                      "\n Press the Enter key to move on. "
                      + "</html>");
+                    incorrect++;
                 }   
                 moveOn = new JButton();
                 moveOn.setBounds(0, 0, popupWidth, popupHeight);
