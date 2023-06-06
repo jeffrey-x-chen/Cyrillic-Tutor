@@ -9,11 +9,9 @@ public class App extends JFrame {
     int vocabSize = 50;
     int count = 0;
     boolean reset = true;
-    private JFrame frameMain;
     private JLabel instructionText;
     private JTextField input;
     private JButton enter;
-    private JFrame popup;
     private JLabel feedback;
     private JButton moveOn;
 
@@ -232,12 +230,11 @@ public class App extends JFrame {
             
         int frameWidth = 800;
         int frameHeight = 700;
-        frameMain = new JFrame();
-        frameMain.setTitle("Cyrilic Alphabet Tutor");
-        frameMain.setSize(frameWidth, frameHeight);
-        frameMain.setVisible(true);
-        frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameMain.setLocationRelativeTo(null);
+        setTitle("Cyrilic Alphabet Tutor");
+        setSize(frameWidth, frameHeight);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         //String to be displayed in instructions
         cyrilicWord = randomize();
@@ -322,6 +319,7 @@ public class App extends JFrame {
         returnString = pronunciationMeaning[0][rng];
         return returnString;
     }
+
     public static void main (String[] args) {
         App app = new App();
         app.setVisible(true);
