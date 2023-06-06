@@ -642,6 +642,13 @@ public class AlphabetPractice extends JFrame {
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setLocationRelativeTo(null);
 
+        ImageIcon backgroundImageIcon = new ImageIcon("path/to/your/image.jpg");
+        Image backgroundImage = backgroundImageIcon.getImage();
+        
+        BackgroundPanel backgroundPanel = new BackgroundPanel(backgroundImage);
+
+        frameMain.setContentPane(backgroundPanel);
+        
         //String to be displayed in instructions
         cyrilicWord = randomize();
 
@@ -761,7 +768,7 @@ public class AlphabetPractice extends JFrame {
                     mapCyrillicToEnglishPronunciation(c);
                 
                 // Append the character and its pronunciation to the result
-                pronunciation += c + ": " + englishPronunciation + " \n";
+                pronunciation += c + ": " + englishPronunciation + "; ";
             }
         }
         
@@ -839,6 +846,20 @@ public class AlphabetPractice extends JFrame {
                 return "ya";
             default:
                 return "Unknown";
+        }
+    }
+
+    class BackgroundPanel extends JPanel {
+        private Image backgroundImage;
+    
+        public BackgroundPanel(Image backgroundImage) {
+            this.backgroundImage = backgroundImage;
+        }
+    
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
     }
 
