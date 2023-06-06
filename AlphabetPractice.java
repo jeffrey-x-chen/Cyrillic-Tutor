@@ -633,7 +633,7 @@ public class AlphabetPractice extends JFrame {
         }
             
         int frameWidth = 800;
-        int frameHeight = 700;
+        int frameHeight = 600;
         frameMain = new JFrame();
         frameMain.setTitle("Cyrilic Alphabet Tutor");
         frameMain.setSize(frameWidth, frameHeight);
