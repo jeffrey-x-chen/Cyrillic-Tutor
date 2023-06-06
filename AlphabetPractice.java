@@ -663,8 +663,8 @@ public class AlphabetPractice extends JFrame {
         instructionText.setFont(new Font("Courier", Font.BOLD, 20));
 
         highlight = new JPanel();
-        highlight.setBounds((int) frameWidth/25, 0, 
-            (int) (frameWidth-frameWidth/5), frameHeight/2);
+        highlight.setBounds(frameWidth/50, frameHeight/5, 
+            frameWidth-frameWidth/10, frameHeight/9);
         highlight.setBackground(Color.WHITE);
         // Text box to type answers in 
         input = new JTextField();
