@@ -10,6 +10,7 @@ public class AlphabetPractice extends JFrame {
     int count = 0;
     int correct = 0;
     int incorrect = 0;
+    int fontSize = 20;
     private JFrame frameMain;
     private JPanel highlight;
     private JLabel instructionText;
@@ -17,6 +18,7 @@ public class AlphabetPractice extends JFrame {
     private JLabel score;
     private JTextField input;
     private JButton enter;
+    private JButton reset;
     private JLabel feedback;
     private JLabel pronunciation;
     private JButton moveOn;
@@ -663,7 +665,7 @@ public class AlphabetPractice extends JFrame {
             + cyrilicWord + " ]. Click Enter when you are finished." + "</html>");
         instructionText.setBounds(frameWidth/25, 0, 
             frameWidth-frameWidth/5, frameHeight/2);
-        instructionText.setFont(new Font("Courier", Font.BOLD, 20));
+        instructionText.setFont(new Font("Courier", Font.BOLD, fontSize));
 
         // box behind instructions to make it stand out
         highlight = new JPanel();
@@ -674,7 +676,7 @@ public class AlphabetPractice extends JFrame {
         // score measuring correct and incorrect counts
         score = new JLabel ("<html>" + "Correct: " + correct + 
             " Incorrect: " + incorrect + "</html>");
-        score.setFont(new Font("Courier", Font.BOLD, 20));
+        score.setFont(new Font("Courier", Font.BOLD, fontSize));
         score.setBounds(frameWidth/25, 0, 
             frameWidth-frameWidth/5, frameHeight/10);
         
@@ -685,23 +687,32 @@ public class AlphabetPractice extends JFrame {
 
         // Text box to type answers in
         input = new JTextField();
-        input.setBounds((int) frameWidth/25, (int)frameHeight/2, 
-            (int) (frameWidth * 0.7), 100);
-        input.setFont(new Font("Courier", Font.BOLD, 20));
+        input.setBounds(frameWidth/50, (int) (frameHeight/2.5), 
+            (int) (frameWidth * 0.7), frameHeight/6);
+        input.setFont(new Font("Courier", Font.BOLD, fontSize));
         
         // Setting up interactible "enter" button
         enter = new JButton("Enter");
-        enter.setBounds((int) (frameWidth * 0.78), (int) frameHeight/2, 
-            100, 100);
+        enter.setFont(new Font("Courier", Font.BOLD, fontSize));
+        enter.setBounds((int) (frameWidth * 0.78), (int) (frameHeight/2.5), 
+            frameWidth/8, frameHeight/6);
         enter.setBackground(Color.WHITE);
         enter.setOpaque(true);
         frameMain.getRootPane().setDefaultButton(enter);
+
+        reset = new JButton("Reset");
+        reset.setFont(new Font("Courier", Font.BOLD, fontSize));
+        reset.setBounds(frameWidth/50, (int) (frameHeight/1.5), 
+            frameWidth/8, frameHeight/6);
+        reset.setBackground(Color.WHITE);
+        reset.setOpaque(true);
 
         layeredPane.add(highlight,JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(scoreHighlight,JLayeredPane.DEFAULT_LAYER);
         layeredPane.add(score, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(instructionText, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(input, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(reset, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(enter, JLayeredPane.PALETTE_LAYER);
         frameMain.setContentPane(layeredPane);
         frameMain.setVisible(true);
@@ -775,12 +786,25 @@ public class AlphabetPractice extends JFrame {
                 });
         
                 String newWord = randomize();
-                instructionText.setText("Type the English pronunciation of [ " +
-                    newWord + " ]");
+                instructionText.setText("<html>" + "Type the English pronunciation of [ "
+                     + newWord + " ]. Click Enter when you are finished." + 
+                     "</html>");
                 input.setText("");
+                score.setText("<html>" + "Correct: " + correct + 
+                " Incorrect: " + incorrect + "</html>");
             }
         }
-        );    
+        ); 
+        
+        reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent a) {
+                correct = 0;
+                incorrect = 0;
+                score.setText("<html>" + "Correct: " + correct + 
+                " Incorrect: " + incorrect + "</html>");
+            }
+        });
     }
 
     public String randomize() {
