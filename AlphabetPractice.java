@@ -662,6 +662,10 @@ public class AlphabetPractice extends JFrame {
             (int) (frameWidth-frameWidth/5), (int) frameHeight/2);
         instructionText.setFont(new Font("Courier", Font.BOLD, 20));
 
+        highlight = new JPanel();
+        highlight.setBounds((int) frameWidth/25, 0, 
+            (int) (frameWidth-frameWidth/5), frameHeight/2);
+        highlight.setBackground(Color.WHITE);
         // Text box to type answers in 
         input = new JTextField();
         input.setBounds((int) frameWidth/25, (int)frameHeight/2, 
@@ -676,9 +680,10 @@ public class AlphabetPractice extends JFrame {
         enter.setOpaque(true);
         frameMain.getRootPane().setDefaultButton(enter);
 
-        layeredPane.add(instructionText, 2);
-        layeredPane.add(input, 2);
-        layeredPane.add(enter, 2);
+        layeredPane.add(highlight,JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(instructionText, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(input, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(enter, JLayeredPane.PALETTE_LAYER);
         frameMain.setContentPane(layeredPane);
         frameMain.setVisible(true);
         /* 
