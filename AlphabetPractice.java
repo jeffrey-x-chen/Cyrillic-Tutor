@@ -14,6 +14,7 @@ public class AlphabetPractice extends JFrame {
     private JTextField input;
     private JButton enter;
     private JLabel feedback;
+    private JLabel pronunciation;
     private JButton moveOn;
 
     /* NOTE: for the cyrilic and english arrays to match up, the cyrilic
@@ -688,6 +689,11 @@ public class AlphabetPractice extends JFrame {
                     popupWidth, popupHeight/2);
                 feedback.setFont(new Font("Courier", Font.BOLD, 20));
                 
+                pronunciation = new JLabel();
+                pronunciation.setBounds(popupWidth/100, popupHeight/100 + popupHeight/2
+                    , popupWidth, popupHeight/2);
+                pronunciation.setText
+                    (analyzeCyrillicString(pronunciationMeaning[0][count]));
                 
                 String userResponse = input.getText();
                 if (userResponse.equalsIgnoreCase(pronunciationMeaning[1][count])) {
@@ -695,21 +701,20 @@ public class AlphabetPractice extends JFrame {
                      pronunciationMeaning[0][count] + " is pronounced as " + 
                      pronunciationMeaning[1][count] + ". It means " +
                      pronunciationMeaning[2][count] + "." + 
-                     "\n Press the Enter key or the Continue button to move on. "
+                     "\n Press the Enter key to move on. "
                      + "</html>");
                 }   else {
                     feedback.setText("<html>" + "Not quite. " + 
                      pronunciationMeaning[0][count] + " is pronounced as " + 
                      pronunciationMeaning[1][count] + ". It means " +
                      pronunciationMeaning[2][count] + "." + 
-                     "\n Press the Enter key or the Continue button to move on. "
+                     "\n Press the Enter key to move on. "
                      + "</html>");
                 }   
                 moveOn = new JButton("Continue");
-                moveOn.setBounds(popupWidth/100,popupHeight/100 + popupHeight/2, 
-                    popupWidth/5, popupHeight/4);
+                moveOn.setBounds(0, 0, popupWidth, popupHeight);
                 moveOn.setBackground(Color.WHITE);
-                moveOn.setOpaque(true);
+                moveOn.setOpaque(false);
 
                 popup.add(feedback);
                 popup.add(moveOn);
@@ -739,6 +744,99 @@ public class AlphabetPractice extends JFrame {
         returnString = pronunciationMeaning[0][rng];
         return returnString;
     }
+
+    public String analyzeCyrillicString(String cyrillicString) {
+        StringBuilder pronunciation = new StringBuilder();
+        
+        for (int i = 0; i < cyrillicString.length(); i++) {
+            char c = cyrillicString.charAt(i);
+            
+            // Check if the character is Cyrillic
+            if (Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CYRILLIC) {
+                // Map the Cyrillic character to its English pronunciation
+                String englishPronunciation = mapCyrillicToEnglishPronunciation(c);
+                
+                // Append the character and its pronunciation to the result
+                pronunciation.append(c).append(": ").append(englishPronunciation).append("\n");
+            }
+        }
+        
+        return pronunciation.toString();
+    }
+
+    private String mapCyrillicToEnglishPronunciation(char c) {
+        switch (c) {
+            case 'а':
+                return "a";
+            case 'б':
+                return "b";
+            case 'в':
+                return "v";
+            case 'г':
+                return "g";
+            case 'д':
+                return "d";
+            case 'е':
+                return "e";
+            case 'ё':
+                return "yo";
+            case 'ж':
+                return "zh";
+            case 'з':
+                return "z";
+            case 'и':
+                return "i";
+            case 'й':
+                return "y";
+            case 'к':
+                return "k";
+            case 'л':
+                return "l";
+            case 'м':
+                return "m";
+            case 'н':
+                return "n";
+            case 'о':
+                return "o";
+            case 'п':
+                return "p";
+            case 'р':
+                return "r";
+            case 'с':
+                return "s";
+            case 'т':
+                return "t";
+            case 'у':
+                return "u";
+            case 'ф':
+                return "f";
+            case 'х':
+                return "kh";
+            case 'ц':
+                return "ts";
+            case 'ч':
+                return "ch";
+            case 'ш':
+                return "sh";
+            case 'щ':
+                return "shch";
+            case 'ъ':
+                return "";
+            case 'ы':
+                return "y";
+            case 'ь':
+                return "'";
+            case 'э':
+                return "e";
+            case 'ю':
+                return "yu";
+            case 'я':
+                return "ya";
+            default:
+                return "Unknown";
+        }
+    }
+
     public static void main (String[] args) {
         AlphabetPractice app = new AlphabetPractice();
         app.setVisible(true);
