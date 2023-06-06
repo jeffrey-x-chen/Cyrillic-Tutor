@@ -678,7 +678,7 @@ public class AlphabetPractice extends JFrame {
                 // Popup window after enter is clicked
                 JFrame popup = new JFrame();
                 int popupWidth = 500;
-                int popupHeight = 400;
+                int popupHeight = 600;
                 popup.setTitle("Feedback");
                 popup.setSize(popupWidth, popupHeight);
                 popup.setLayout(null);
@@ -690,10 +690,11 @@ public class AlphabetPractice extends JFrame {
                 feedback.setFont(new Font("Courier", Font.BOLD, 20));
                 
                 pronunciation = new JLabel();
-                pronunciation.setBounds(popupWidth/100, popupHeight/100 + popupHeight/2
+                pronunciation.setBounds(popupWidth/100, popupHeight/100 + popupHeight/5
                     , popupWidth, popupHeight/2);
                 pronunciation.setText
-                    (analyzeCyrillicString(pronunciationMeaning[0][count]));
+                    ("<html>" + analyzeCyrillicString(pronunciationMeaning[0][count])
+                    + "</html>");
                 pronunciation.setFont(new Font("Courier", Font.BOLD, 20));
                 
                 String userResponse = input.getText();
@@ -760,7 +761,7 @@ public class AlphabetPractice extends JFrame {
                     mapCyrillicToEnglishPronunciation(c);
                 
                 // Append the character and its pronunciation to the result
-                pronunciation += c + ": " + englishPronunciation + "\n";
+                pronunciation += c + ": " + englishPronunciation + " \n";
             }
         }
         
