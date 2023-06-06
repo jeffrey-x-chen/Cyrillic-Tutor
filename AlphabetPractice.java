@@ -642,18 +642,15 @@ public class AlphabetPractice extends JFrame {
         frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameMain.setLocationRelativeTo(null);
 
+        JLayeredPane layeredPane = new JLayeredPane();
+
         ImageIcon backgroundImageIcon = new ImageIcon
             ("NearAChurch_FyodorVasilev.jfif");
         JLabel background = new JLabel(backgroundImageIcon);
-        // Set the layout manager of the content pane to BorderLayout
-        frameMain.getContentPane().setLayout(new BorderLayout());
-        
-        // Add the label to the center of the content pane
-        frameMain.getContentPane().add(background, BorderLayout.CENTER);
-        frameMain.setVisible(true);
-        frameMain.setLayout(null);
+        background.setBounds(0, 0, frameWidth, frameHeight);
+        layeredPane.add(background, JLayeredPane.FRAME_CONTENT_LAYER);
 
-        
+
         //String to be displayed in instructions
         cyrilicWord = randomize();
 
@@ -678,9 +675,16 @@ public class AlphabetPractice extends JFrame {
         enter.setOpaque(true);
         frameMain.getRootPane().setDefaultButton(enter);
 
+        layeredPane.add(instructionText, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(input, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(enter, JLayeredPane.DEFAULT_LAYER);
+        frameMain.setContentPane(layeredPane);
+        frameMain.setVisible(true);
+        /* 
         frameMain.add(instructionText);
         frameMain.add(input);
         frameMain.add(enter);
+        */
 
         enter.addActionListener(new ActionListener() {
             @Override
@@ -773,7 +777,7 @@ public class AlphabetPractice extends JFrame {
                     mapCyrillicToEnglishPronunciation(c);
                 
                 // Append the character and its pronunciation to the result
-                pronunciation += c + ": " + englishPronunciation + "; ";
+                pronunciation += c + "- " + englishPronunciation + "; ";
             }
         }
         
